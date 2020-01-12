@@ -1,9 +1,11 @@
 "use strict";
 
-module.exports = function (url) {
+var output = require('./output.js');
+
+module.exports = function (url, func) {
   $.get(url, function (data) {
-    console.log(data);
-    var html = '<img src="' + data.recipes[0].image + '" alt="' + data.recipes[0].title + '">';
-    $('.main').html(html);
+    var theData = data; // output(theData);
+
+    func(theData);
   });
 };

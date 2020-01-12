@@ -52,4 +52,4 @@ module.exports = function (data) {
   $('.main').html(ul);
 };
 
-},{"./api.js":1,"./get.js":2,"./log.js":3}]},{},[2]);
+},{"./api.js":1,"./get.js":2,"./log.js":3}]},{},[4]);
