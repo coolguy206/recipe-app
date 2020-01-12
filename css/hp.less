@@ -1,30 +1,31 @@
 .hp {
-  display:flex;
-  flex-wrap:wrap;
-  list-style-type:none;
-  position:fixed;
-  top:0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    position: fixed;
+    top: 0;
 
-  li {
-    @media screen and (max-width:768px){
-      flex-basis: 50%;
-    }
-    flex-basis:33%;
-    position:relative;
+    li {
+        @media screen and (max-width: 768px) {
+            flex-basis: 50%;
+        }
 
-    .overlay {
-      background:#000;
-opacity: .5;
-position: absolute;
-z-index: 999;
-height: 100%;
-width: 100%;
-    }
+        flex-basis:33%;
+        position:relative;
 
-    a {
-      img {
-        height:100%;
-      }
+        .overlay {
+            background: #000;
+            opacity: .5;
+            position: absolute;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+        }
+
+        a {
+            img {
+                height: 100%;
+            }
+        }
     }
-  }
 }
