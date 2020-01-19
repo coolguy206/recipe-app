@@ -2,22 +2,37 @@
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
-    position: fixed;
+    // position: fixed;
     top: 0;
 
     li {
         @media screen and (max-width: 768px) {
             flex-basis: 50%;
+
+            &:last-of-type {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 414px) {
+            flex-basis: 100%;
+
+            &:last-of-type {
+                display: block;
+            }
         }
 
         flex-basis:33%;
         position:relative;
 
         .overlay {
+            @media screen and (max-width: 768px){
+                display:none;
+            }
             background: #000;
             opacity: .5;
             position: absolute;
-            z-index: 999;
+            z-index: 99;
             height: 100%;
             width: 100%;
         }
@@ -27,5 +42,17 @@
                 height: 100%;
             }
         }
+    }
+}
+
+&.pdp {
+    position: relative;
+    transform: none;
+    left: 0;
+    top: 0;
+    padding: 1% 0;
+
+    h1 {
+        margin: 0 0 1%;
     }
 }

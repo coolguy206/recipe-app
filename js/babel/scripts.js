@@ -12,17 +12,13 @@ var log = require('./log.js');
 
 $(document).ready(function () {
   copyright();
-  var url = "https://api.spoonacular.com/recipes/random?apiKey=".concat(api, "&number=6&tags=dessert"); // console.log(api);
+  var url = "https://api.spoonacular.com/recipes/random?apiKey=".concat(api, "&number=9&tags=dessert"); // console.log(api);
 
   ajax(url, output);
-  $('.hp li').hover(function () {
-    $(this).find('.overlay').addClass('hide');
-  }, function () {
-    $(this).find('.overlay').removeClass('hide');
-  });
-  $('.hp li a').click(function (e) {
+  $('.header a').click(function (e) {
     e.preventDefault();
-    var url = "https://api.spoonacular.com/recipes/{id}/information?apiKey=".concat(api);
-    ajax(url, log);
+    $('.homepage').show();
+    $('.header').removeClass('pdp');
+    $('.main .pdp, .main .search').empty();
   });
 });
