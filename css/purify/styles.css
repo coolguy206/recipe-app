@@ -109,6 +109,7 @@ h1 {
 @media screen and (max-width:414px) {
   .main .pdp div {
     flex-basis: 100%;
+    padding: 0;
   }
 }
 
@@ -135,7 +136,7 @@ h1 {
 }
 
 @media screen and (max-width:414px) {
-  .main .pdp div:last-of-type {
-    padding: 0 10%;
+  .main .pdp div:nth-of-type(2) {
+    padding: 0 5%;
   }
 }

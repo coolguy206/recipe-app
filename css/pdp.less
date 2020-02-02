@@ -7,6 +7,7 @@
         div {
             @media screen and (max-width: 414px) {
                 flex-basis: 100%;
+                padding: 0;
             }
 
             flex-basis: 50%;
@@ -16,7 +17,8 @@
                 width: 100%;
             }
 
-            h2,h3 {
+            h2,
+            h3 {
                 letter-spacing: .1em;
             }
 
@@ -33,27 +35,70 @@
             ul,
             ol,
             p {
-                @media screen and (max-width:414px){
+                @media screen and (max-width: 414px) {
                     margin: 0 0 4%;
                 }
+
                 margin: 0 0 2%;
             }
 
-            ul, ol {
+            ul,
+            ol {
+                @media screen and (max-width: 414px) {
+                    padding: 0 0 0 6%;
+                }
+
                 li {
                     margin: 0 0 2%;
 
                     a {
-                        color:#fff;
+                        color: #fff;
                     }
                 }
             }
 
-            
 
-            &:last-of-type {
+
+            &:nth-of-type(2) {
                 @media screen and (max-width: 414px) {
-                    padding: 0 10%;
+                    padding: 0 5%;
+                }
+            }
+
+            &.similar-recipes {
+                flex-basis: 100%;
+                padding: 0;
+
+                h2 {
+                    text-align: center;
+                    font-size: 3em;
+                    line-height: 1em;
+                    flex-basis: 100%;
+                }
+
+                .hp {
+                    @media screen and (max-width: 414px) {
+                        padding: 0;
+                    }
+
+                    li {
+                        @media screen and (max-width: 768px) {
+                            margin: 0;
+                            flex-basis: 50%;
+                        }
+
+                        @media screen and (max-width: 414px) {
+                            flex-basis: 100%;
+                        }
+
+                        flex-basis: 25%;
+
+                        &:last-of-type {
+                            @media screen and (max-width: 768px) {
+                                display: flex;
+                            }
+                        }
+                    }
                 }
             }
         }

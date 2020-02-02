@@ -1,28 +1,34 @@
 const get = require('./get.js');
-const log = require('./log.js');
 const api = require('./api.js');
+const log = require('./log.js');
 const makeList = require('./make-list.js');
 const hoverList = require('./hover-list.js');
 const makePdp = require('./make-pdp.js');
-// const pdp = require('./pdp.js');
+
 
 module.exports = function(data) {
-    console.log('output.js');
+    log('make-similar-recipes.js');
+  
+    log(data);
+            
+    var h2 = `<h2>Similar Recipes</h2>`;
 
-    makeList(data.recipes, 'hp', '.homepage');
+    makeList(data, 'hp', '.similar-recipes');
+    
+    $('.similar-recipes').prepend(h2);
 
     hoverList('.hp li');
 
-    $('.recipe').click(function(e) {
-        log('recipe click');
+      
+    $('.similar-recipes').find('a').click(function(e){
+        log('similar recipes click');
         e.preventDefault();
         // log($(this).attr('data-id'));
         const id = $(this).attr('data-id');
         var url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${api}`;
         log(url);
-
+        
         get(url, makePdp);
-
     });
-
+    
 };

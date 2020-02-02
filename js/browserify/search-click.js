@@ -6,16 +6,6 @@ module.exports = '1aad54a0e3e345b998872e1be7cb5603';
 },{}],2:[function(require,module,exports){
 "use strict";
 
-module.exports = function () {
-  var d = new Date();
-  var year = d.getFullYear();
-  var html = "&copy; ".concat(year);
-  $('.footer span').html(html);
-};
-
-},{}],3:[function(require,module,exports){
-"use strict";
-
 var log = require('./log.js');
 
 module.exports = function (url, func) {
@@ -28,7 +18,7 @@ module.exports = function (url, func) {
   });
 };
 
-},{"./log.js":5}],4:[function(require,module,exports){
+},{"./log.js":4}],3:[function(require,module,exports){
 "use strict";
 
 var log = require('./log.js');
@@ -42,7 +32,7 @@ module.exports = function (elem) {
   });
 };
 
-},{"./log.js":5}],5:[function(require,module,exports){
+},{"./log.js":4}],4:[function(require,module,exports){
 "use strict";
 
 module.exports = function (data) {
@@ -50,7 +40,7 @@ module.exports = function (data) {
   console.log(data);
 };
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 var log = require('./log.js');
@@ -75,7 +65,7 @@ module.exports = function (data, theClass, elem) {
   $(elem).html(ul);
 };
 
-},{"./log.js":5}],7:[function(require,module,exports){
+},{"./log.js":4}],6:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -167,7 +157,7 @@ module.exports = function (data) {
   get(similarRecipeUrl, makeRecipes);
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-similar-recipes.js":9}],8:[function(require,module,exports){
+},{"./api.js":1,"./get.js":2,"./hover-list.js":3,"./log.js":4,"./make-list.js":5,"./make-similar-recipes.js":8}],7:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -200,7 +190,7 @@ module.exports = function (data) {
   });
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],9:[function(require,module,exports){
+},{"./api.js":1,"./get.js":2,"./hover-list.js":3,"./log.js":4,"./make-list.js":5,"./make-pdp.js":6}],8:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -233,71 +223,7 @@ module.exports = function (data) {
   });
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],10:[function(require,module,exports){
-"use strict";
-
-var get = require('./get.js');
-
-var log = require('./log.js');
-
-var api = require('./api.js');
-
-var makeList = require('./make-list.js');
-
-var hoverList = require('./hover-list.js');
-
-var makePdp = require('./make-pdp.js'); // const pdp = require('./pdp.js');
-
-
-module.exports = function (data) {
-  console.log('output.js');
-  makeList(data.recipes, 'hp', '.homepage');
-  hoverList('.hp li');
-  $('.recipe').click(function (e) {
-    log('recipe click');
-    e.preventDefault(); // log($(this).attr('data-id'));
-
-    var id = $(this).attr('data-id');
-    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api);
-    log(url);
-    get(url, makePdp);
-  });
-};
-
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],11:[function(require,module,exports){
-"use strict";
-
-var copyright = require('./copyright.js');
-
-var get = require('./get.js');
-
-var api = require('./api.js');
-
-var output = require('./output.js');
-
-var log = require('./log.js');
-
-var searchClick = require('./search-click.js');
-
-$(document).ready(function () {
-  copyright();
-  var url = "https://api.spoonacular.com/recipes/random?apiKey=".concat(api, "&number=9&tags=dessert"); // console.log(api);
-
-  get(url, output);
-  $('.header a').click(function (e) {
-    e.preventDefault();
-    $('.homepage').show();
-    $('.header').removeClass('pdp');
-    $('.main .pdp, .main .search').empty();
-  });
-  $('.header input').keypress(function (e) {
-    if (e.keyCode === 13) {
-      searchClick();
-    }
-  });
-});
-
-},{"./api.js":1,"./copyright.js":2,"./get.js":3,"./log.js":5,"./output.js":10,"./search-click.js":12}],12:[function(require,module,exports){
+},{"./api.js":1,"./get.js":2,"./hover-list.js":3,"./log.js":4,"./make-list.js":5,"./make-pdp.js":6}],9:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -317,4 +243,4 @@ module.exports = function () {
   get(url, makeSearch);
 };
 
-},{"./api.js":1,"./get.js":3,"./log.js":5,"./make-search.js":8}]},{},[11]);
+},{"./api.js":1,"./get.js":2,"./log.js":4,"./make-search.js":7}]},{},[9]);

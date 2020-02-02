@@ -1,9 +1,13 @@
-const output = require('./output.js');
+const log = require('./log.js');
 
 module.exports = function(url, func) {
+	
+	log('get.js');
+
   $.get(url, function(data) {
 
-    const theData = data;
+    var theData = data;
+    log(theData);
     // output(theData);
     func(theData);
   });

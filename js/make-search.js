@@ -1,20 +1,25 @@
+
 const get = require('./get.js');
-const log = require('./log.js');
 const api = require('./api.js');
+const log = require('./log.js');
 const makeList = require('./make-list.js');
 const hoverList = require('./hover-list.js');
 const makePdp = require('./make-pdp.js');
-// const pdp = require('./pdp.js');
+
 
 module.exports = function(data) {
-    console.log('output.js');
+	
+	log('make-search.js');
+	log(data);
+	$('.header').addClass('pdp');
+    $('.homepage').hide();
+    $('.main .pdp').empty();
 
-    makeList(data.recipes, 'hp', '.homepage');
+	makeList(data.results, 'search-list', '.main .search');
 
-    hoverList('.hp li');
 
-    $('.recipe').click(function(e) {
-        log('recipe click');
+    $('.search-list a').click(function(e) {
+        log('search list click');
         e.preventDefault();
         // log($(this).attr('data-id'));
         const id = $(this).attr('data-id');
@@ -24,5 +29,6 @@ module.exports = function(data) {
         get(url, makePdp);
 
     });
+
 
 };
