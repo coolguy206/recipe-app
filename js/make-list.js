@@ -10,6 +10,8 @@ module.exports = function(data, theClass, elem) {
     $.each(data, function(i, val) {
         // var imgsrc = val.image;
         var title = val.title;
+        var servings = val.servings;
+        var cookTime = val.readyInMinutes;
         var id = val.id;
         var imgsrc = `https://spoonacular.com/recipeImages/${id}-636x393.jpg`;
         var html = `
@@ -17,6 +19,11 @@ module.exports = function(data, theClass, elem) {
         <div class="overlay"></div>
         <a href="#/recipe/${id}" data-id="${id}" class="recipe">
           <img src=${imgsrc} alt="${title}" title="${title}">
+          <div>
+            <h2>${title}</h2>
+            <p>Cook time: ${cookTime} min</p>
+            <p>Servings: ${servings}</p>
+          </div>
         </a>
       </li>
       `;

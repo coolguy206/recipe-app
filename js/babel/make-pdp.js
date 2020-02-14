@@ -8,8 +8,6 @@ var api = require('./api.js');
 
 var makeList = require('./make-list.js');
 
-var hoverList = require('./hover-list.js');
-
 var makeRecipes = require('./make-similar-recipes.js');
 
 module.exports = function (data) {
@@ -24,7 +22,9 @@ module.exports = function (data) {
   var servings = data.servings;
   var readyIn = data.readyInMinutes;
   var prep = data.preparationMinutes;
-  var img = data.image;
+  var imgType = data.imageType; // let img = data.image;
+
+  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.").concat(imgType);
   var gluten = data.glutenFree;
 
   if (gluten == true) {

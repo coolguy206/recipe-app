@@ -18,21 +18,7 @@ module.exports = function (url, func) {
   });
 };
 
-},{"./log.js":4}],3:[function(require,module,exports){
-"use strict";
-
-var log = require('./log.js');
-
-module.exports = function (elem) {
-  log('hover-list.js');
-  $(elem).hover(function () {
-    $(this).find('.overlay').addClass('hide');
-  }, function () {
-    $(this).find('.overlay').removeClass('hide');
-  });
-};
-
-},{"./log.js":4}],4:[function(require,module,exports){
+},{"./log.js":3}],3:[function(require,module,exports){
 "use strict";
 
 module.exports = function (data) {
@@ -40,7 +26,7 @@ module.exports = function (data) {
   console.log(data);
 };
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 var log = require('./log.js');
@@ -54,9 +40,11 @@ module.exports = function (data, theClass, elem) {
   $.each(data, function (i, val) {
     // var imgsrc = val.image;
     var title = val.title;
+    var servings = val.servings;
+    var cookTime = val.readyInMinutes;
     var id = val.id;
     var imgsrc = "https://spoonacular.com/recipeImages/".concat(id, "-636x393.jpg");
-    var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </a>\n      </li>\n      ");
+    var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n          <div>\n            <h2>").concat(title, "</h2>\n            <p>Cook time: ").concat(cookTime, " min</p>\n            <p>Servings: ").concat(servings, "</p>\n          </div>\n        </a>\n      </li>\n      ");
     li = li + html;
   }); // console.log(li);
 
@@ -65,7 +53,7 @@ module.exports = function (data, theClass, elem) {
   $(elem).html(ul);
 };
 
-},{"./log.js":4}],6:[function(require,module,exports){
+},{"./log.js":3}],5:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -75,8 +63,6 @@ var log = require('./log.js');
 var api = require('./api.js');
 
 var makeList = require('./make-list.js');
-
-var hoverList = require('./hover-list.js');
 
 var makeRecipes = require('./make-similar-recipes.js');
 
@@ -92,7 +78,9 @@ module.exports = function (data) {
   var servings = data.servings;
   var readyIn = data.readyInMinutes;
   var prep = data.preparationMinutes;
-  var img = data.image;
+  var imgType = data.imageType; // let img = data.image;
+
+  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.").concat(imgType);
   var gluten = data.glutenFree;
 
   if (gluten == true) {
@@ -157,7 +145,7 @@ module.exports = function (data) {
   get(similarRecipeUrl, makeRecipes);
 };
 
-},{"./api.js":1,"./get.js":2,"./hover-list.js":3,"./log.js":4,"./make-list.js":5,"./make-similar-recipes.js":7}],7:[function(require,module,exports){
+},{"./api.js":1,"./get.js":2,"./log.js":3,"./make-list.js":4,"./make-similar-recipes.js":6}],6:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -168,17 +156,14 @@ var log = require('./log.js');
 
 var makeList = require('./make-list.js');
 
-var hoverList = require('./hover-list.js');
-
 var makePdp = require('./make-pdp.js');
 
 module.exports = function (data) {
   log('make-similar-recipes.js');
   log(data);
   var h2 = "<h2>Similar Recipes</h2>";
-  makeList(data, 'hp', '.similar-recipes');
+  makeList(data, 'null', '.similar-recipes');
   $('.similar-recipes').prepend(h2);
-  hoverList('.hp li');
   $('.similar-recipes').find('a').click(function (e) {
     log('similar recipes click');
     e.preventDefault(); // log($(this).attr('data-id'));
@@ -190,4 +175,4 @@ module.exports = function (data) {
   });
 };
 
-},{"./api.js":1,"./get.js":2,"./hover-list.js":3,"./log.js":4,"./make-list.js":5,"./make-pdp.js":6}]},{},[7]);
+},{"./api.js":1,"./get.js":2,"./log.js":3,"./make-list.js":4,"./make-pdp.js":5}]},{},[6]);

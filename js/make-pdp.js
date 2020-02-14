@@ -2,13 +2,12 @@ const get = require('./get.js');
 const log = require('./log.js');
 const api = require('./api.js');
 const makeList = require('./make-list.js');
-const hoverList = require('./hover-list.js');
 const makeRecipes = require('./make-similar-recipes.js');
 
 
 module.exports = function(data) {
     log('make-pdp.js');
-  
+
     log(data);
     $('.header').addClass('pdp');
     $('.homepage').hide();
@@ -20,15 +19,17 @@ module.exports = function(data) {
     let servings = data.servings;
     let readyIn = data.readyInMinutes;
     let prep = data.preparationMinutes;
-    let img = data.image;
+    let imgType = data.imageType;
+    // let img = data.image;
+    let img = `https://spoonacular.com/recipeImages/${id}-556x370.${imgType}`;
     let gluten = data.glutenFree;
-            
+
     if (gluten == true) {
         gluten = 'yes';
     } else {
         gluten = 'no';
     }
-            
+
     var ingredients = [];
     $.each(data.extendedIngredients, function(i, val) {
         var imgUrl = 'https://spoonacular.com/cdn/ingredients_250x250/';
@@ -49,7 +50,7 @@ module.exports = function(data) {
     log(gluten);
     log(ingredients);
     log(steps);*/
-    
+
     // log(winePairing);
 
     var html = `

@@ -64,9 +64,11 @@ module.exports = function (data, theClass, elem) {
   $.each(data, function (i, val) {
     // var imgsrc = val.image;
     var title = val.title;
+    var servings = val.servings;
+    var cookTime = val.readyInMinutes;
     var id = val.id;
     var imgsrc = "https://spoonacular.com/recipeImages/".concat(id, "-636x393.jpg");
-    var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </a>\n      </li>\n      ");
+    var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n          <div>\n            <h2>").concat(title, "</h2>\n            <p>Cook time: ").concat(cookTime, " min</p>\n            <p>Servings: ").concat(servings, "</p>\n          </div>\n        </a>\n      </li>\n      ");
     li = li + html;
   }); // console.log(li);
 
@@ -86,8 +88,6 @@ var api = require('./api.js');
 
 var makeList = require('./make-list.js');
 
-var hoverList = require('./hover-list.js');
-
 var makeRecipes = require('./make-similar-recipes.js');
 
 module.exports = function (data) {
@@ -102,7 +102,9 @@ module.exports = function (data) {
   var servings = data.servings;
   var readyIn = data.readyInMinutes;
   var prep = data.preparationMinutes;
-  var img = data.image;
+  var imgType = data.imageType; // let img = data.image;
+
+  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.").concat(imgType);
   var gluten = data.glutenFree;
 
   if (gluten == true) {
@@ -167,7 +169,7 @@ module.exports = function (data) {
   get(similarRecipeUrl, makeRecipes);
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-similar-recipes.js":9}],8:[function(require,module,exports){
+},{"./api.js":1,"./get.js":3,"./log.js":5,"./make-list.js":6,"./make-similar-recipes.js":9}],8:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -177,8 +179,6 @@ var api = require('./api.js');
 var log = require('./log.js');
 
 var makeList = require('./make-list.js');
-
-var hoverList = require('./hover-list.js');
 
 var makePdp = require('./make-pdp.js');
 
@@ -187,20 +187,27 @@ module.exports = function (data) {
   log(data);
   $('.header').addClass('pdp');
   $('.homepage').hide();
-  $('.main .pdp').empty();
-  makeList(data.results, 'search-list', '.main .search');
-  $('.search-list a').click(function (e) {
-    log('search list click');
-    e.preventDefault(); // log($(this).attr('data-id'));
+  $('.main .pdp, .search').empty();
+  log(data.results.length);
 
-    var id = $(this).attr('data-id');
-    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api);
-    log(url);
-    get(url, makePdp);
-  });
+  if (data.results.length == 0) {
+    var searchEmptyHtml = "<h2>Oh No!<br> Please try another search.</h2>";
+    $('.search').append(searchEmptyHtml);
+  } else {
+    makeList(data.results, 'search-list', '.main .search');
+    $('.search-list a').click(function (e) {
+      log('search list click');
+      e.preventDefault(); // log($(this).attr('data-id'));
+
+      var id = $(this).attr('data-id');
+      var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api);
+      log(url);
+      get(url, makePdp);
+    });
+  }
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],9:[function(require,module,exports){
+},{"./api.js":1,"./get.js":3,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],9:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -211,17 +218,14 @@ var log = require('./log.js');
 
 var makeList = require('./make-list.js');
 
-var hoverList = require('./hover-list.js');
-
 var makePdp = require('./make-pdp.js');
 
 module.exports = function (data) {
   log('make-similar-recipes.js');
   log(data);
   var h2 = "<h2>Similar Recipes</h2>";
-  makeList(data, 'hp', '.similar-recipes');
+  makeList(data, 'null', '.similar-recipes');
   $('.similar-recipes').prepend(h2);
-  hoverList('.hp li');
   $('.similar-recipes').find('a').click(function (e) {
     log('similar recipes click');
     e.preventDefault(); // log($(this).attr('data-id'));
@@ -233,7 +237,7 @@ module.exports = function (data) {
   });
 };
 
-},{"./api.js":1,"./get.js":3,"./hover-list.js":4,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],10:[function(require,module,exports){
+},{"./api.js":1,"./get.js":3,"./log.js":5,"./make-list.js":6,"./make-pdp.js":7}],10:[function(require,module,exports){
 "use strict";
 
 var get = require('./get.js');
@@ -312,8 +316,10 @@ module.exports = function () {
   log('search-click.js');
   $('.main .search').empty();
   var searchTerm = $('.header input').val();
+  var offset = Math.floor(Math.random() * 900);
+  log(offset);
   log(searchTerm);
-  var url = "https://api.spoonacular.com/recipes/search?apiKey=".concat(api, "&query=").concat(searchTerm, "&number=10");
+  var url = "https://api.spoonacular.com/recipes/search?apiKey=".concat(api, "&query=").concat(searchTerm, "&number=10&offset=").concat(offset);
   get(url, makeSearch);
 };
 

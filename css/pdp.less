@@ -24,10 +24,15 @@
 
             h2 {
                 text-transform: capitalize;
+                font-size: 3em;
+                margin: 0 0 4% !important;
+                line-height: 1em;
             }
 
             h3 {
                 text-transform: uppercase;
+                font-size: 2em;
+                margin: 4% 0% !important;
             }
 
             h2,
@@ -65,42 +70,7 @@
                 }
             }
 
-            &.similar-recipes {
-                flex-basis: 100%;
-                padding: 0;
 
-                h2 {
-                    text-align: center;
-                    font-size: 3em;
-                    line-height: 1em;
-                    flex-basis: 100%;
-                }
-
-                .hp {
-                    @media screen and (max-width: 414px) {
-                        padding: 0;
-                    }
-
-                    li {
-                        @media screen and (max-width: 768px) {
-                            margin: 0;
-                            flex-basis: 50%;
-                        }
-
-                        @media screen and (max-width: 414px) {
-                            flex-basis: 100%;
-                        }
-
-                        flex-basis: 25%;
-
-                        &:last-of-type {
-                            @media screen and (max-width: 768px) {
-                                display: flex;
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }
