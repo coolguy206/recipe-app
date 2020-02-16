@@ -9,10 +9,12 @@ module.exports = '1aad54a0e3e345b998872e1be7cb5603';
 var log = require('./log.js');
 
 module.exports = function (url, func) {
-  log('get.js');
+  // log('get.js');
   $.get(url, function (data) {
-    var theData = data;
-    log(theData); // output(theData);
+    var theData = data; // log(theData);
+    // output(theData);
+    // log(typeof func);
+    // log(func);
 
     func(theData);
   });
@@ -24,7 +26,7 @@ module.exports = function (url, func) {
 var log = require('./log.js');
 
 module.exports = function (elem) {
-  log('hover-list.js');
+  // log('hover-list.js');
   $(elem).hover(function () {
     $(this).find('.overlay').addClass('hide');
   }, function () {
@@ -46,9 +48,8 @@ module.exports = function (data) {
 var log = require('./log.js');
 
 module.exports = function (data, theClass, elem) {
-  log('make-list.js'); // console.log(data);
-
-  log(data);
+  // log('make-list.js');
+  // log(data);
   var ul = document.createElement("UL");
   var li = '';
   $.each(data, function (i, val) {
@@ -60,8 +61,7 @@ module.exports = function (data, theClass, elem) {
     var imgsrc = "https://spoonacular.com/recipeImages/".concat(id, "-636x393.jpg");
     var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n          <div>\n            <h2>").concat(title, "</h2>\n            <p>Cook time: ").concat(cookTime, " min</p>\n            <p>Servings: ").concat(servings, "</p>\n          </div>\n        </a>\n      </li>\n      ");
     li = li + html;
-  }); // console.log(li);
-
+  });
   $(ul).addClass(theClass);
   $(ul).append(li);
   $(elem).html(ul);

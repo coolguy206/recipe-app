@@ -9,10 +9,12 @@ module.exports = '1aad54a0e3e345b998872e1be7cb5603';
 var log = require('./log.js');
 
 module.exports = function (url, func) {
-  log('get.js');
+  // log('get.js');
   $.get(url, function (data) {
-    var theData = data;
-    log(theData); // output(theData);
+    var theData = data; // log(theData);
+    // output(theData);
+    // log(typeof func);
+    // log(func);
 
     func(theData);
   });

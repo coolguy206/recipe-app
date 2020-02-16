@@ -9,10 +9,12 @@ module.exports = '1aad54a0e3e345b998872e1be7cb5603';
 var log = require('./log.js');
 
 module.exports = function (url, func) {
-  log('get.js');
+  // log('get.js');
   $.get(url, function (data) {
-    var theData = data;
-    log(theData); // output(theData);
+    var theData = data; // log(theData);
+    // output(theData);
+    // log(typeof func);
+    // log(func);
 
     func(theData);
   });
@@ -24,7 +26,7 @@ module.exports = function (url, func) {
 var log = require('./log.js');
 
 module.exports = function (elem) {
-  log('hover-list.js');
+  // log('hover-list.js');
   $(elem).hover(function () {
     $(this).find('.overlay').addClass('hide');
   }, function () {
@@ -46,9 +48,8 @@ module.exports = function (data) {
 var log = require('./log.js');
 
 module.exports = function (data, theClass, elem) {
-  log('make-list.js'); // console.log(data);
-
-  log(data);
+  // log('make-list.js');
+  // log(data);
   var ul = document.createElement("UL");
   var li = '';
   $.each(data, function (i, val) {
@@ -60,8 +61,7 @@ module.exports = function (data, theClass, elem) {
     var imgsrc = "https://spoonacular.com/recipeImages/".concat(id, "-636x393.jpg");
     var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\" data-id=\"").concat(id, "\" class=\"recipe\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\" title=\"").concat(title, "\">\n          <div>\n            <h2>").concat(title, "</h2>\n            <p>Cook time: ").concat(cookTime, " min</p>\n            <p>Servings: ").concat(servings, "</p>\n          </div>\n        </a>\n      </li>\n      ");
     li = li + html;
-  }); // console.log(li);
-
+  });
   $(ul).addClass(theClass);
   $(ul).append(li);
   $(elem).html(ul);
@@ -81,8 +81,7 @@ var makeList = require('./make-list.js');
 var makeRecipes = require('./make-similar-recipes.js');
 
 module.exports = function (data) {
-  log('make-pdp.js');
-  log(data);
+  // log('make-pdp.js');
   $('.header').addClass('pdp');
   $('.homepage').hide();
   $('.main .pdp, .search').empty();
@@ -92,9 +91,9 @@ module.exports = function (data) {
   var servings = data.servings;
   var readyIn = data.readyInMinutes;
   var prep = data.preparationMinutes;
-  var imgType = data.imageType; // let img = data.image;
+  var imgType = data.imageType; // var img = data.image;
 
-  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.").concat(imgType);
+  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.jpg");
   var gluten = data.glutenFree;
 
   if (gluten == true) {
@@ -112,10 +111,6 @@ module.exports = function (data) {
     };
     ingredients.push(obj);
   });
-  var steps = [];
-  $.each(data.analyzedInstructions[0].steps, function (i, val) {
-    steps.push(val.step);
-  });
   /*log(title);
   log(servings);
   log(readyIn);
@@ -126,16 +121,26 @@ module.exports = function (data) {
   log(steps);*/
   // log(winePairing);
 
-  var html = "\n        <div>\n            <img src=\"".concat(img, "\" alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </div>\n\n        <div>\n           <h2>").concat(title, "</h2>\n            <p>Servings: ").concat(servings, "</p>\n           <p>Cook time: ").concat(readyIn, " min</p>\n           <p>Gluten Free: ").concat(gluten, "</p>\n           <h3>Ingredients</h3>\n           <ul class=\"ingredients\"></ul>\n           <h3>Steps</h3>\n           <ol class=\"steps\"></ol>\n        </div>\n           \n        <div class=\"similar-recipes\"></div>\n     ");
+  var html = "\n        <div>\n            <img src=\"".concat(img, "\" alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </div>\n\n        <div>\n           <h2>").concat(title, "</h2>\n            <p>Servings: ").concat(servings, "</p>\n           <p>Cook time: ").concat(readyIn, " min</p>\n           <p>Gluten Free: ").concat(gluten, "</p>\n           <h3>Ingredients</h3>\n           <ul class=\"ingredients\"></ul>\n        </div>\n           \n        <div class=\"similar-recipes\"></div>\n     ");
   $('.main .pdp').html(html);
+  var steps = [];
+
+  if (data.analyzedInstructions.length !== 0) {
+    $.each(data.analyzedInstructions[0].steps, function (i, val) {
+      steps.push(val.step);
+    });
+    var stepsHtml = " <h3>Steps</h3>\n           <ol class=\"steps\"></ol>";
+    $('.ingredients').after(stepsHtml);
+    $.each(steps, function (i, val) {
+      var li = "<li>".concat(val, "</li>");
+      $('.steps').append(li);
+    });
+  }
+
   $.each(ingredients, function (i, val) {
     // var li = `<li><a href="${val.image}" target="_blank">${val.string}</a></li>`;
     var li = "<li>".concat(val.string, "</li>");
     $('.ingredients').append(li);
-  });
-  $.each(steps, function (i, val) {
-    var li = "<li>".concat(val, "</li>");
-    $('.steps').append(li);
   });
   var wines = [];
 
@@ -173,20 +178,11 @@ var makeList = require('./make-list.js');
 var makePdp = require('./make-pdp.js');
 
 module.exports = function (data) {
-  log('make-similar-recipes.js');
-  log(data);
+  // log('make-similar-recipes.js');
+  // log(data);
   var h2 = "<h2>Similar Recipes</h2>";
   makeList(data, 'null', '.similar-recipes');
   $('.similar-recipes').prepend(h2);
-  $('.similar-recipes').find('a').click(function (e) {
-    log('similar recipes click');
-    e.preventDefault(); // log($(this).attr('data-id'));
-
-    var id = $(this).attr('data-id');
-    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api);
-    log(url);
-    get(url, makePdp);
-  });
 };
 
 },{"./api.js":1,"./get.js":2,"./log.js":4,"./make-list.js":5,"./make-pdp.js":6}],8:[function(require,module,exports){
@@ -206,16 +202,16 @@ var makePdp = require('./make-pdp.js'); // const pdp = require('./pdp.js');
 
 
 module.exports = function (data) {
-  console.log('output.js');
+  // console.log('output.js');
   makeList(data.recipes, 'hp', '.homepage');
   hoverList('.hp li');
   $('.recipe').click(function (e) {
-    log('recipe click');
+    // log('recipe click');
     e.preventDefault(); // log($(this).attr('data-id'));
 
     var id = $(this).attr('data-id');
-    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api);
-    log(url);
+    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api); // log(url);
+
     get(url, makePdp);
   });
 };

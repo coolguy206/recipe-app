@@ -6,25 +6,14 @@ const makePdp = require('./make-pdp.js');
 
 
 module.exports = function(data) {
-    log('make-similar-recipes.js');
+    // log('make-similar-recipes.js');
 
-    log(data);
+    // log(data);
 
     var h2 = `<h2>Similar Recipes</h2>`;
 
     makeList(data, 'null', '.similar-recipes');
 
     $('.similar-recipes').prepend(h2);
-
-    $('.similar-recipes').find('a').click(function(e) {
-        log('similar recipes click');
-        e.preventDefault();
-        // log($(this).attr('data-id'));
-        const id = $(this).attr('data-id');
-        var url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${api}`;
-        log(url);
-
-        get(url, makePdp);
-    });
 
 };

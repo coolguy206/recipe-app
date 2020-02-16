@@ -7,19 +7,19 @@ const makePdp = require('./make-pdp.js');
 // const pdp = require('./pdp.js');
 
 module.exports = function(data) {
-    console.log('output.js');
+    // console.log('output.js');
 
     makeList(data.recipes, 'hp', '.homepage');
 
     hoverList('.hp li');
 
     $('.recipe').click(function(e) {
-        log('recipe click');
+        // log('recipe click');
         e.preventDefault();
         // log($(this).attr('data-id'));
         const id = $(this).attr('data-id');
         var url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${api}`;
-        log(url);
+        // log(url);
 
         get(url, makePdp);
 

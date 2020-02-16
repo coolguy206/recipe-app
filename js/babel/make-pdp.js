@@ -11,8 +11,7 @@ var makeList = require('./make-list.js');
 var makeRecipes = require('./make-similar-recipes.js');
 
 module.exports = function (data) {
-  log('make-pdp.js');
-  log(data);
+  // log('make-pdp.js');
   $('.header').addClass('pdp');
   $('.homepage').hide();
   $('.main .pdp, .search').empty();
@@ -22,9 +21,9 @@ module.exports = function (data) {
   var servings = data.servings;
   var readyIn = data.readyInMinutes;
   var prep = data.preparationMinutes;
-  var imgType = data.imageType; // let img = data.image;
+  var imgType = data.imageType; // var img = data.image;
 
-  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.").concat(imgType);
+  var img = "https://spoonacular.com/recipeImages/".concat(id, "-556x370.jpg");
   var gluten = data.glutenFree;
 
   if (gluten == true) {
@@ -42,10 +41,6 @@ module.exports = function (data) {
     };
     ingredients.push(obj);
   });
-  var steps = [];
-  $.each(data.analyzedInstructions[0].steps, function (i, val) {
-    steps.push(val.step);
-  });
   /*log(title);
   log(servings);
   log(readyIn);
@@ -56,16 +51,26 @@ module.exports = function (data) {
   log(steps);*/
   // log(winePairing);
 
-  var html = "\n        <div>\n            <img src=\"".concat(img, "\" alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </div>\n\n        <div>\n           <h2>").concat(title, "</h2>\n            <p>Servings: ").concat(servings, "</p>\n           <p>Cook time: ").concat(readyIn, " min</p>\n           <p>Gluten Free: ").concat(gluten, "</p>\n           <h3>Ingredients</h3>\n           <ul class=\"ingredients\"></ul>\n           <h3>Steps</h3>\n           <ol class=\"steps\"></ol>\n        </div>\n           \n        <div class=\"similar-recipes\"></div>\n     ");
+  var html = "\n        <div>\n            <img src=\"".concat(img, "\" alt=\"").concat(title, "\" title=\"").concat(title, "\">\n        </div>\n\n        <div>\n           <h2>").concat(title, "</h2>\n            <p>Servings: ").concat(servings, "</p>\n           <p>Cook time: ").concat(readyIn, " min</p>\n           <p>Gluten Free: ").concat(gluten, "</p>\n           <h3>Ingredients</h3>\n           <ul class=\"ingredients\"></ul>\n        </div>\n           \n        <div class=\"similar-recipes\"></div>\n     ");
   $('.main .pdp').html(html);
+  var steps = [];
+
+  if (data.analyzedInstructions.length !== 0) {
+    $.each(data.analyzedInstructions[0].steps, function (i, val) {
+      steps.push(val.step);
+    });
+    var stepsHtml = " <h3>Steps</h3>\n           <ol class=\"steps\"></ol>";
+    $('.ingredients').after(stepsHtml);
+    $.each(steps, function (i, val) {
+      var li = "<li>".concat(val, "</li>");
+      $('.steps').append(li);
+    });
+  }
+
   $.each(ingredients, function (i, val) {
     // var li = `<li><a href="${val.image}" target="_blank">${val.string}</a></li>`;
     var li = "<li>".concat(val.string, "</li>");
     $('.ingredients').append(li);
-  });
-  $.each(steps, function (i, val) {
-    var li = "<li>".concat(val, "</li>");
-    $('.steps').append(li);
   });
   var wines = [];
 

@@ -1,9 +1,9 @@
 const log = require('./log.js');
 
 module.exports = function(data, theClass, elem) {
-    log('make-list.js');
-    // console.log(data);
-    log(data);
+    // log('make-list.js');
+  
+    // log(data);
     var ul = document.createElement("UL");
     var li = '';
 
@@ -30,7 +30,7 @@ module.exports = function(data, theClass, elem) {
 
         li = li + html;
     });
-    // console.log(li);
+  
     $(ul).addClass(theClass);
     $(ul).append(li);
     $(elem).html(ul);

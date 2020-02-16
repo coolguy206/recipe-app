@@ -6,23 +6,22 @@ const makeRecipes = require('./make-similar-recipes.js');
 
 
 module.exports = function(data) {
-    log('make-pdp.js');
+    // log('make-pdp.js');
 
-    log(data);
     $('.header').addClass('pdp');
     $('.homepage').hide();
     $('.main .pdp, .search').empty();
     window.scrollTo(0, 0);
 
-    let id = data.id;
-    let title = data.title;
-    let servings = data.servings;
-    let readyIn = data.readyInMinutes;
-    let prep = data.preparationMinutes;
-    let imgType = data.imageType;
-    // let img = data.image;
-    let img = `https://spoonacular.com/recipeImages/${id}-556x370.${imgType}`;
-    let gluten = data.glutenFree;
+    var id = data.id;
+    var title = data.title;
+    var servings = data.servings;
+    var readyIn = data.readyInMinutes;
+    var prep = data.preparationMinutes;
+    var imgType = data.imageType;
+    // var img = data.image;
+    var img = `https://spoonacular.com/recipeImages/${id}-556x370.jpg`;
+    var gluten = data.glutenFree;
 
     if (gluten == true) {
         gluten = 'yes';
@@ -35,11 +34,6 @@ module.exports = function(data) {
         var imgUrl = 'https://spoonacular.com/cdn/ingredients_250x250/';
         var obj = { string: val.original, image: imgUrl + val.image };
         ingredients.push(obj);
-    });
-
-    var steps = [];
-    $.each(data.analyzedInstructions[0].steps, function(i, val) {
-        steps.push(val.step);
     });
 
     /*log(title);
@@ -65,8 +59,6 @@ module.exports = function(data) {
            <p>Gluten Free: ${gluten}</p>
            <h3>Ingredients</h3>
            <ul class="ingredients"></ul>
-           <h3>Steps</h3>
-           <ol class="steps"></ol>
         </div>
            
         <div class="similar-recipes"></div>
@@ -74,15 +66,28 @@ module.exports = function(data) {
 
     $('.main .pdp').html(html);
 
+    var steps = [];
+    if (data.analyzedInstructions.length !== 0) {
+        $.each(data.analyzedInstructions[0].steps, function(i, val) {
+            steps.push(val.step);
+        });
+
+        var stepsHtml = ` <h3>Steps</h3>
+           <ol class="steps"></ol>`;
+
+        $('.ingredients').after(stepsHtml);
+
+        $.each(steps, function(i, val) {
+            var li = `<li>${val}</li>`;
+            $('.steps').append(li);
+        });
+
+    }
+
     $.each(ingredients, function(i, val) {
         // var li = `<li><a href="${val.image}" target="_blank">${val.string}</a></li>`;
         var li = `<li>${val.string}</li>`;
         $('.ingredients').append(li);
-    });
-
-    $.each(steps, function(i, val) {
-        var li = `<li>${val}</li>`;
-        $('.steps').append(li);
     });
 
 
@@ -92,7 +97,7 @@ module.exports = function(data) {
             wines.push(val);
         });
 
-        let winePairing = { text: data.winePairing.pairingText, wineList: wines };
+        var winePairing = { text: data.winePairing.pairingText, wineList: wines };
 
         var wineHtml = `
             <h3>Wine Pairing</h3>
@@ -109,7 +114,7 @@ module.exports = function(data) {
 
     }
 
-    let similarRecipeUrl = `https://api.spoonacular.com/recipes/${id}/similar?apiKey=${api}&number=4`;
+    var similarRecipeUrl = `https://api.spoonacular.com/recipes/${id}/similar?apiKey=${api}&number=4`;
 
     get(similarRecipeUrl, makeRecipes);
 
