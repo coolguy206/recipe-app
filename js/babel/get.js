@@ -1,10 +1,14 @@
 "use strict";
 
-var output = require('./output.js');
+var log = require('./log.js');
 
 module.exports = function (url, func) {
+  // log('get.js');
   $.get(url, function (data) {
-    var theData = data; // output(theData);
+    var theData = data; // log(theData);
+    // output(theData);
+    // log(typeof func);
+    // log(func);
 
     func(theData);
   });

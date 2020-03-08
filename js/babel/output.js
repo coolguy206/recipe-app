@@ -1,26 +1,29 @@
 "use strict";
 
-var ajax = require('./get.js');
+var get = require('./get.js');
 
 var log = require('./log.js');
 
 var api = require('./api.js');
 
+var makeList = require('./make-list.js');
+
+var hoverList = require('./hover-list.js');
+
+var makePdp = require('./make-pdp.js'); // const pdp = require('./pdp.js');
+
+
 module.exports = function (data) {
-  console.log('output.js'); // console.log(data);
+  // console.log('output.js');
+  makeList(data.recipes, 'hp', '.homepage');
+  hoverList('.hp li');
+  $('.recipe').click(function (e) {
+    // log('recipe click');
+    e.preventDefault(); // log($(this).attr('data-id'));
 
-  log(data);
-  var ul = document.createElement("UL");
-  var li = '';
-  $.each(data.recipes, function (i, val) {
-    var imgsrc = val.image;
-    var title = val.title;
-    var id = val.id;
-    var html = "\n      <li>\n        <div class=\"overlay\"></div>\n        <a href=\"#/recipe/".concat(id, "\">\n          <img src=").concat(imgsrc, " alt=\"").concat(title, "\">\n        </a>\n      </li>\n      ");
-    li = li + html;
-  }); // console.log(li);
+    var id = $(this).attr('data-id');
+    var url = "https://api.spoonacular.com/recipes/".concat(id, "/information?apiKey=").concat(api); // log(url);
 
-  $(ul).addClass('hp');
-  $(ul).append(li);
-  $('.main').html(ul);
+    get(url, makePdp);
+  });
 };

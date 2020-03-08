@@ -13,21 +13,51 @@ body {
 
 h1 {
   margin: 0 0 4%;
+  line-height: 1em;
   font-size: 4em;
+}
+
+@media screen and (max-width:414px) {
+  h1 {
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width:320px) {
+  h1 {
+    font-size: 2em;
+  }
 }
 
 .header {
   width: 100%;
-  position: absolute;
-  top: 33%;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
   z-index: 999;
 }
 
-.header h1 {
+@media screen and (max-width:768px) {
+  .header {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 999;
+    padding: 4% 0;
+  }
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header a h1 {
   color: #fff;
   text-align: center;
+  text-shadow: -3px 3px #000;
 }
 
 .header input {
@@ -37,4 +67,98 @@ h1 {
   border-radius: 5px;
   border: 1px solid #000;
   margin: 0 auto;
+  box-shadow: -3px 3px #000;
+  font-size: 1em;
+}
+
+@media screen and (max-width:414px) {
+  .header input {
+    padding: 3%;
+  }
+}
+
+.footer {
+  color: #fff;
+  text-align: center;
+  padding: 1% 0;
+}
+
+.pdp {
+  position: relative;
+  transform: none;
+  left: 0;
+  top: 0;
+  padding: 1% 0;
+}
+
+.pdp h1 {
+  margin: 0 0 1%;
+}
+
+.main .pdp {
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main .pdp div {
+  flex-basis: 50%;
+  padding: 2%;
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div {
+    flex-basis: 100%;
+    padding: 0;
+  }
+}
+
+.main .pdp div h2,.main .pdp div h3 {
+  letter-spacing: .1em;
+}
+
+.main .pdp div h2 {
+  text-transform: capitalize;
+  font-size: 3em;
+  margin: 0 0 4% !important;
+  line-height: 1em;
+}
+
+.main .pdp div h3 {
+  text-transform: uppercase;
+  font-size: 2em;
+  margin: 4% 0% !important;
+}
+
+.main .pdp div h2,.main .pdp div h3 {
+  margin: 0 0 2%;
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div h2,  .main .pdp div h3 {
+    margin: 0 0 4%;
+  }
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div:nth-of-type(2) {
+    padding: 0 5%;
+  }
+}
+
+.search {
+  margin: 3% 0 0;
+}
+
+.search h2 {
+  text-align: center;
+  font-size: 3em;
+  line-height: 1.2em;
+  color: #fff;
+}
+
+@media screen and (max-width:414px) {
+  .search h2 {
+    font-size: 1.5em;
+  }
 }

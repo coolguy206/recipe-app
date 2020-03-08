@@ -1,32 +1,28 @@
-const ajax = require('./get.js');
-const log =require('./log.js');
-const api =require('./api.js');
+const get = require('./get.js');
+const log = require('./log.js');
+const api = require('./api.js');
+const makeList = require('./make-list.js');
+const hoverList = require('./hover-list.js');
+const makePdp = require('./make-pdp.js');
+// const pdp = require('./pdp.js');
 
 module.exports = function(data) {
-console.log('output.js');
-    // console.log(data);
-    log(data);
-    var ul = document.createElement("UL");
-    var li = '';
-    $.each(data.recipes, function(i,val){
-      var imgsrc = val.image;
-      var title = val.title;
-      var id = val.id;
-      var html = `
-      <li>
-        <div class="overlay"></div>
-        <a href="#/recipe/${id}">
-          <img src=${imgsrc} alt="${title}">
-        </a>
-      </li>
-      `;
+    // console.log('output.js');
 
-      li = li + html;
+    makeList(data.recipes, 'hp', '.homepage');
+
+    hoverList('.hp li');
+
+    $('.recipe').click(function(e) {
+        // log('recipe click');
+        e.preventDefault();
+        // log($(this).attr('data-id'));
+        const id = $(this).attr('data-id');
+        var url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${api}`;
+        // log(url);
+
+        get(url, makePdp);
+
     });
-    // console.log(li);
-    $(ul).addClass('hp');
-$(ul).append(li);
-$('.main').html(ul);
-
 
 };
