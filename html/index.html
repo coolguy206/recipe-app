@@ -1,42 +1,43 @@
-﻿
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
-  <title>Recipe App</title>
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="author" content="David Thanphilom">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link href="css/less/styles.css" rel="stylesheet" type="text/css" />
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
-  <!--[if lt IE 9]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <title>Recipe App</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="David Thanphilom">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link href="css/less/styles.css" rel="stylesheet" type="text/css" />
+    <!--   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script> -->
+    <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
 
 <body>
-
-  <header class="header">
-    <a href="#"><h1>Recipe Finder</h1></a>
-    <input type="text" placeholder="search">
-  </header>
-
-  <section class="main">
-    <div class="homepage"></div>
-    <div class="search"></div>
-    <div class="pdp"></div>
-  </section>
-
-  <footer class="footer">
-    <span></span>
-  </footer>
-
-  <script src="js/browserify/scripts.js"></script>
-  <script src="http://localhost:35729/livereload.js"></script>
+    <div id="app"></div>
+    <header class="header">
+        <a href="#">
+            <h1>Recipe Finder</h1>
+        </a>
+        <input type="text" placeholder="search">
+    </header>
+    <section class="main">
+        <div class="homepage"></div>
+        <div class="search"></div>
+        <div class="pdp"></div>
+    </section>
+    <footer class="footer">
+        <span></span>
+    </footer>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <!-- <script src="js/browserify/scripts.js"></script> -->
+    <script src="js/uglify/scripts-test.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
 </body>
 
 </html>

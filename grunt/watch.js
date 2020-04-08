@@ -6,7 +6,7 @@ module.exports = {
 
   dist: {
     files: ['css/*.less', 'html/*.html', 'js/*.js'],
-    tasks: ['less', 'purifycss', 'babel', 'browserify', 'uglify', 'includes'],
+    tasks: ['less', 'purifycss', 'babel', 'browserify', 'uglify', 'includes','copy'],
   },
 
 };
