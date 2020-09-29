@@ -7,8 +7,15 @@
 body {
   font-size: 100%;
   line-height: 150%;
-  background: #000;
   font-family: sans-serif;
+}
+
+h1,h2,h3,h4,a {
+  font-family: 'Montserrat',sans-serif;
+}
+
+h2,h3,h4 {
+  line-height: 150%;
 }
 
 h1 {
@@ -36,6 +43,8 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
+  background: linear-gradient(to right, #fea300, #ff0048);
+  border-bottom: 2px solid #000;
 }
 
 @media screen and (max-width:768px) {
@@ -57,28 +66,40 @@ h1 {
 .header h1 a {
   color: #fff;
   text-decoration: none;
-  text-shadow: -3px 3px #000;
+  text-shadow: -2px 2px 0 #000;
+}
+
+@media screen and (max-width:414px) {
+  .header h1 a {
+    text-shadow: -1px 1px 0 #000;
+  }
 }
 
 .header input {
-  padding: 2%;
+  padding: 1%;
   width: 80%;
   display: block;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   margin: 0 auto;
-  box-shadow: -3px 3px #000;
   font-size: 1em;
+}
+
+@media screen and (max-width:768px) {
+  .header input {
+    padding: 2%;
+  }
 }
 
 @media screen and (max-width:414px) {
   .header input {
     padding: 3%;
+    border: 1px solid #000;
   }
 }
 
 .footer {
-  color: #fff;
+  color: #000;
   text-align: center;
   padding: 1% 0;
 }
@@ -88,17 +109,42 @@ h1 {
   transform: none;
   left: 0;
   top: 0;
-  padding: 1% 0;
+  padding: 2% 0;
+}
+
+@media screen and (max-width:768px) {
+  .pdp {
+    padding: 4% 0;
+  }
+}
+
+@media screen and (max-width:414px) {
+  .pdp {
+    padding: 6% 0;
+  }
 }
 
 .pdp h1 {
   margin: 0 0 1%;
 }
 
+@media screen and (max-width:768px) {
+  .pdp h1 {
+    margin: 0 0 2%;
+  }
+}
+
+@media screen and (max-width:414px) {
+  .pdp h1 {
+    margin: 0 0 4%;
+  }
+}
+
 .main .pdp {
-  color: #fff;
-  display: flex;
+  color: #000;
   flex-wrap: wrap;
+  padding: 0;
+  display: none;
 }
 
 .main .pdp div {
@@ -106,10 +152,31 @@ h1 {
   padding: 2%;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:768px) {
   .main .pdp div {
     flex-basis: 100%;
+  }
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div {
     padding: 0;
+  }
+}
+
+.main .pdp div a {
+  display: inline-block;
+  margin: 0 1% 1% 0;
+  color: #fff;
+  background: #ff0048;
+  padding: .5%;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+@media screen and (max-width:768px) {
+  .main .pdp div a {
+    margin: 0 2% 2% 0;
   }
 }
 
@@ -120,23 +187,39 @@ h1 {
 .main .pdp div h2 {
   text-transform: capitalize;
   font-size: 3em;
-  margin: 0 0 4% !important;
   line-height: 1em;
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div h2 {
+    font-size: 2em;
+  }
 }
 
 .main .pdp div h3 {
   text-transform: uppercase;
   font-size: 2em;
-  margin: 4% 0% !important;
+}
+
+@media screen and (max-width:414px) {
+  .main .pdp div h3 {
+    font-size: 1.7em;
+  }
 }
 
 .main .pdp div h2,.main .pdp div h3 {
-  margin: 0 0 2%;
+  margin: 0 0 4%;
+}
+
+@media screen and (max-width:1024px) {
+  .main .pdp div h2,  .main .pdp div h3 {
+    margin: 0 0 5%;
+  }
 }
 
 @media screen and (max-width:414px) {
   .main .pdp div h2,  .main .pdp div h3 {
-    margin: 0 0 4%;
+    margin: 0 0 10%;
   }
 }
 
@@ -147,6 +230,10 @@ h1 {
 }
 
 .search {
+  display: none;
+}
+
+.search {
   margin: 3% 0 0;
 }
 
@@ -154,11 +241,12 @@ h1 {
   text-align: center;
   font-size: 3em;
   line-height: 1.2em;
-  color: #fff;
+  margin: 0 0 2%;
 }
 
 @media screen and (max-width:414px) {
   .search h2 {
     font-size: 1.5em;
+    margin: 0 0 4%;
   }
 }

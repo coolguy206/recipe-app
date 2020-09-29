@@ -1,62 +1,81 @@
 .hp {
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    // position: fixed;
-    top: 0;
+  // display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  // position: fixed;
+  display:none;
+  top: 0;
 
-    li {
-        @media screen and (max-width: 768px) {
-            flex-basis: 50%;
+  li {
+    @media screen and (max-width: 768px) {
+      flex-basis: 50%;
 
-            &:last-of-type {
-                display: none;
-            }
-        }
-
-        @media screen and (max-width: 414px) {
-            flex-basis: 100%;
-
-            &:last-of-type {
-                display: block;
-            }
-        }
-
-        flex-basis:33%;
-        position:relative;
-
-        .overlay {
-            @media screen and (max-width: 768px){
-                display:none;
-            }
-            background: #000;
-            opacity: .5;
-            position: absolute;
-            z-index: 99;
-            height: 100%;
-            width: 100%;
-        }
-
-        a {
-            img {
-                height: 100%;
-            }
-
-            div {
-                display:none;
-            }
-        }
+      &:last-of-type {
+        display: none;
+      }
     }
+    @media screen and (max-width: 414px) {
+      flex-basis: 100%;
+
+      &:last-of-type {
+        display: block;
+      }
+    }
+    flex-basis: 33%;
+    position: relative;
+    overflow: hidden;
+
+    a {
+      img {
+        height: 100%;
+        width: 100%;
+      }
+
+      div {
+        bottom: -200%;
+        position: absolute;
+        transition: bottom 0.2s;
+        width:100%;
+        background: rgba(0,0,0,.5);
+        padding: 4%;
+        color: #fff;
+
+        &.active {
+          bottom: 0;
+
+        }
+
+        h2 {}
+
+        h2,
+        p {
+          margin: 0 0 2%;
+        }
+      }
+    }
+  }
 }
 
 &.pdp {
-    position: relative;
-    transform: none;
-    left: 0;
-    top: 0;
-    padding: 1% 0;
+  @media screen and (max-width:768px) {
+    padding: 4% 0;
+  }
+  @media screen and (max-width:414px){
+    padding: 6% 0;
+  }
+  position: relative;
+  transform: none;
+  left: 0;
+  top: 0;
+  padding: 2% 0;
 
-    h1 {
-        margin: 0 0 1%;
+  h1 {
+    @media screen and (max-width:768px){
+      margin: 0 0 2%;
     }
+    @media screen and (max-width:414px){
+      margin: 0 0 4%;
+    }
+    margin: 0 0 1%;
+  }
 }

@@ -1,69 +1,73 @@
+@import 'vars.less';
+
 .similar-recipes {
-    flex-basis: 100% !important;
-    padding: 0 !important;
+  flex-basis: 100% !important;
+  padding: 0 !important;
 
-    h2 {
-        text-align: center;
-        font-size: 3em;
-        line-height: 1em;
+  h2 {
+    text-align: center;
+    font-size: 3em;
+    line-height: 1em;
+    flex-basis: 100%;
+  }
+
+  ul {
+    @media screen and (max-width: 414px) {
+      padding: 0 !important;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+
+    li {
+      @media screen and (max-width: 768px) {
+        flex-basis: 50%;
+        padding: 0 2%;
+      }
+      @media screen and (max-width: 414px) {
         flex-basis: 100%;
-    }
+        padding: 0;
+      }
+      flex-basis: 24%;
+      padding: 0 0.5%;
+      margin: 0 !important;
 
-    ul {
-        @media screen and (max-width: 414px) {
-            padding: 0 !important;
+      &:last-of-type {
+        @media screen and (max-width: 768px) {
+          display: flex;
         }
+      }
 
-        display: flex;
-        flex-wrap: wrap;
-        list-style-type:none;
+      .overlay {
+        display: none;
+      }
 
-        li {
-            @media screen and (max-width: 768px) {
-                margin: 0;
-                flex-basis: 50%;
-            }
+      a {
+        text-decoration: none;
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
 
-            @media screen and (max-width: 414px) {
-                flex-basis: 100%;
-            }
+        div {
+          @media screen and (max-width: 414px) {
+            padding: 4% !important;
+          }
+          display: flex;
+          flex-wrap: wrap;
+          text-align: center;
 
-            flex-basis: 24%;
+          h2,
+          p {
+            flex-basis: 100%;
+            color:#000;
+          }
 
-            &:last-of-type {
-                @media screen and (max-width: 768px) {
-                    display: flex;
-                }
-            }
-
-            .overlay {
-                display: none;
-            }
-
-            a {
-                text-decoration: none;
-
-                div {
-                    @media screen and (max-width: 414px) {
-                        padding: 4% !important;
-                    }
-
-                    display: flex;
-                    flex-wrap: wrap;
-                    text-align: center;
-
-                    h2,
-                    p {
-                        flex-basis: 100%;
-                    }
-
-                    h2 {
-                        font-size: 1.5em !important;
-                    }
-                }
-            }
-
+          h2 {
+            font-size: 1.5em !important;
+          }
         }
-
+      }
     }
+  }
 }

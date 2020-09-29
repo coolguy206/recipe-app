@@ -1,76 +1,154 @@
+@import 'vars.less';
+
 .main {
-    .pdp {
-        color: #fff;
-        display: flex;
-        flex-wrap: wrap;
+  .pdp {
+    color: #000;
+    //display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    display:none;
 
-        div {
-            @media screen and (max-width: 414px) {
-                flex-basis: 100%;
-                padding: 0;
-            }
+    div {
+      @media screen and (max-width: 768px) {
+        flex-basis: 100%;
+      }
+      @media screen and (max-width: 414px) {
+        padding: 0;
+      }
+      flex-basis: 50%;
+      padding: 2%;
 
-            flex-basis: 50%;
-            padding: 2%;
-
-            img {
-                width: 100%;
-            }
-
-            h2,
-            h3 {
-                letter-spacing: .1em;
-            }
-
-            h2 {
-                text-transform: capitalize;
-                font-size: 3em;
-                margin: 0 0 4% !important;
-                line-height: 1em;
-            }
-
-            h3 {
-                text-transform: uppercase;
-                font-size: 2em;
-                margin: 4% 0% !important;
-            }
-
-            h2,
-            h3,
-            ul,
-            ol,
-            p {
-                @media screen and (max-width: 414px) {
-                    margin: 0 0 4%;
-                }
-
-                margin: 0 0 2%;
-            }
-
-            ul,
-            ol {
-                @media screen and (max-width: 414px) {
-                    padding: 0 0 0 6%;
-                }
-
-                li {
-                    margin: 0 0 2%;
-
-                    a {
-                        color: #fff;
-                    }
-                }
-            }
-
-
-
-            &:nth-of-type(2) {
-                @media screen and (max-width: 414px) {
-                    padding: 0 5%;
-                }
-            }
-
-
+      a {
+        @media screen and (max-width: 768px) {
+          margin: 0 2% 2% 0;
         }
+        display: inline-block;
+        margin: 0 1% 1% 0;
+        color: #fff;
+        background: @red;
+        padding: 0.5%;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      img {
+        @media screen and (max-width: 414px){
+          border:none;
+          border-bottom: @border;
+        }
+        width: 100%;
+        border: @border;
+      }
+
+      h2,
+      h3 {
+        letter-spacing: 0.1em;
+      }
+
+      h2 {
+        @media screen and (max-width:414px){
+          font-size: 2em;
+        }
+        text-transform: capitalize;
+        font-size: 3em;
+        // margin: 0 0 4% !important;
+        line-height: 1em;
+      }
+
+      h3 {
+        @media screen and (max-width:414px){
+          font-size: 1.7em;
+        }
+        text-transform: uppercase;
+        font-size: 2em;
+        // margin: 4% 0% !important;
+      }
+
+      p {
+        // &.tags {
+        //   a,
+        //   span {
+        //     display: inline-block;
+        //     margin: 0 1% 0 0;
+        //   }
+        // }
+      }
+
+      h2,
+      h3,
+      ol,
+      p,
+      ul {
+        @media screen and (max-width: 1024px) {
+          margin: 0 0 5%;
+        }
+        @media screen and (max-width: 414px){
+          margin: 0 0 10%;
+        }
+        margin: 0 0 4%;
+      }
+
+      ol,
+      ul {
+        @media screen and (max-width: 414px) {
+          padding: 0 0 0 6%;
+        }
+        list-style-type: none;
+        padding: 2%;
+
+        li {
+          margin: 0 0 2%;
+
+          a {
+            color: #fff;
+          }
+        }
+      }
+
+      ul {
+        &.wines {
+          list-style-type: disc;
+        }
+
+        &.ingredients {
+          li {
+            @media screen and (max-width: 414px) {
+              margin: 0 0 4%;
+            }
+
+            svg {
+              @media screen and (max-width: 414px) {
+                margin: 0 4%;
+              }
+              margin: 0 1% 0 0;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &.check {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+
+      ol {
+        list-style-type: decimal;
+
+        ol {
+          margin: 0;
+          padding: 2%;
+          list-style-type: disc;
+        }
+      }
+
+      &:nth-of-type(2) {
+        @media screen and (max-width: 414px) {
+          padding: 0 5%;
+        }
+      }
     }
+  }
 }

@@ -1,95 +1,65 @@
 import React from 'react';
-import { Api } from './Api';
-import { Section } from './Section';
-// import { HomePage } from './HomePage';
+import { HomePage } from './HomePage';
+import {PdpPage} from './PdpPage';
+import {SearchPage} from './SearchPage';
+import {Loading} from './Loading';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  HashRouter,
+   // Link,
+   // useParams
+} from "react-router-dom";
 
 export class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = {
+    //   searchRecipes: []
+    // };
+    this.search = this.search.bind(this);
+    this.blur = this.blur.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            hpRecipes: [],
-            pdpRecipe: {},
-            showPdp: 'none',
-            showHp: 'block'
-        };
-
-        this.click = this.click.bind(this);
-
+  search(e){
+    if(e.keyCode ===  13){
+      // console.log('enter pressed');
+      // console.log(e.target.value);
+      var searchTerm = e.target.value;
+      window.location.hash = `#/search/${searchTerm}`;
+      window.location.reload();
     }
+  }
 
-    componentDidMount() {
+  blur(e){
+    var searchTerm = e.target.value;
+    window.location.hash = `#/search/${searchTerm}`;
+    window.location.reload();
+  }
 
-        let url1 = `https://api.spoonacular.com/recipes/random?apiKey=${Api}&number=9&tags=dessert`;
-        // console.log(url1);
+    // <Switch>
+    // </Switch>
 
-        fetch(url1)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    // console.log(result);
-                    this.setState({
-                        hpRecipes: result.recipes,
-                    });
+  render() {
+    return (
+      <React.Fragment>
+        <HashRouter>
+          <header className="header pdp">
+            <h1><a href="/apps/recipe-finder/react/">Recipe Finder</a></h1>
+            <input type="text" placeholder="search" onKeyUp={this.search} onBlur={this.blur} />
+          </header>
 
-                    console.log('header ajax');
-                    console.log(this.state);
+          <section className="main">
+              <Loading />
+              <Route exact path="/"  component={HomePage} />
+              <Route path="/recipe/:recipeId" component={PdpPage} />
+              <Route path="/search/:searchTerm" component={SearchPage} />
 
-                    var id = result.recipes[0].id;
-                    console.log(id);
-                    //get pdp
-                    let pdpUrl = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${Api}`;
-
-                    fetch(pdpUrl)
-                        .then(res => res.json())
-                        .then(
-                            (result) => {
-
-                            // console.log(result);
-                            this.setState({
-                                pdpRecipe: result,
-                            });
-                            console.log(this.state);
-                        },
-
-                        (error) => {
-                            console.log(error);
-
-                        }
-                    );
-                },
-
-                (error) => {
-                    console.log(error);
-                }
-            )
-
-    }
-
-    click() {
-        document.getElementsByClassName('header')[0].classList.remove('pdp');
-        console.log('from header click');
-        // this.setState({
-        //     showPdp: false,
-        //     showHp: true
-        // });
-    }
-
-
-    render() {
-
-        return (
-            <React.Fragment>
-                <header className="header">
-                    <h1><a href="#" onClick={ this.click }>Recipe Finder</a></h1>
-                  <input type="text" placeholder="search" />
-               </header>
-
-               <Section hpRecipes={this.state.hpRecipes} pdpRecipe={this.state.pdpRecipe} showPdp={this.state.showPdp}   showHp={this.state.showHp} />
-    
-            </React.Fragment>
-        );
-    }
+          </section>
+        </HashRouter>
+      </React.Fragment>
+    );
+  }
 
 }

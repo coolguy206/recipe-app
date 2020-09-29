@@ -1,3 +1,5 @@
+@import 'vars.less';
+
 .header {
     @media screen and (max-width: 768px) {
         width: 100%;
@@ -15,6 +17,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+    background: @gradient;
+    border-bottom: @border;
 
     // a {
     //     text-decoration: none;
@@ -22,26 +26,34 @@
     h1 {
         text-align:center;
         a {
+          @media screen and (max-width: 414px){
+            text-shadow: @shadow;
+          }
             color: #fff;
             text-decoration:none;
-            text-shadow: -3px 3px #000;
+            text-shadow: -2px 2px 0px #000;
         }
     }
 
     // }
 
     input {
+      @media screen and (max-width: 768px) {
+          padding: 2%;
+          
+      }
         @media screen and (max-width: 414px) {
             padding: 3%;
+            border: 1px solid #000;
         }
 
-        padding: 2%;
+        padding: 1%;
         width: 80%;
         display: block;
         border-radius: 5px;
-        border: 1px solid #000;
+        border: @border;
         margin: 0 auto;
-        box-shadow: -3px 3px #000;
+        // box-shadow: @shadow;
         font-size: 1em;
     }
 }
