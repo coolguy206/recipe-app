@@ -160,7 +160,7 @@ export class PdpPage extends React.Component {
         );
       });
 
-      const wines = recipe.winePairing.pairedWines;
+      // const wines = recipe.winePairing.pairedWines;
       // if(wines !== undefined){
       //   var winesLi = wines.map(function(val, i) {
       //     var url = `/search/${val}`;
@@ -239,7 +239,7 @@ export class PdpPage extends React.Component {
               <ol>
                 {instructionsLi}
               </ol>
-              <Wines winesList={wines} wineText={recipe.winePairing.pairingText}/>
+              {/* <Wines winesList={wines} wineText={recipe.winePairing.pairingText}/> */}
             </div>
 
             <div className="similar-recipes">
